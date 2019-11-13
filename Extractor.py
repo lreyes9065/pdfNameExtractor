@@ -1,18 +1,21 @@
 import PyPDF2
 import os
-from StringIO import StringIO
+import tkinter
 import codecs
 import sys
 
 #utf8Writer = codecs.getwriter('utf8')
 #sys.stdout = utf8Writer(sys.stdout)
 
+m = tkinter.Tk()
+m.mainloop()
+
 for filename in os.listdir('ToConvert'):
     #print filename
     try:
         pdf_file = open('ToConvert/' + filename, 'rb')
     except:
-        print 'could not open .dsStore error'
+        print('could not open .dsStore error')
     read_pdf = PyPDF2.PdfFileReader(pdf_file)
     number_of_pages = read_pdf.getNumPages()
     page = read_pdf.getPage(0)
@@ -36,7 +39,7 @@ for filename in os.listdir('ToConvert'):
             testComplete = testLine4 + testLine5
             testComplete = testComplete.replace('/', '')
     except:
-        print 'I had a problem with ' + filename
+        print('I had a problem with ' + filename)
     if 'Dear Sirs' in testComplete:
         testComplete = ''
     #print testComplete.encode('utf8')
@@ -44,7 +47,7 @@ for filename in os.listdir('ToConvert'):
     num = 0
     while True:
         exists = os.path.isfile(newFile)
-        print newFile
+        print(newFile)
         if exists:
             num = num + 1
             newFile = 'NewFile/PureProfile AUD Releases - ' + testComplete.replace('/', '') + str(num) + '.pdf'
@@ -54,5 +57,5 @@ for filename in os.listdir('ToConvert'):
         os.rename('ToConvert/' + filename, newFile)
         pdf_file.close()
     except:
-        print filename
-        print newFile
+        print(filename)
+        print(newFile)
