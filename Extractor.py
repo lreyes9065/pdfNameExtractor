@@ -1,14 +1,26 @@
 import PyPDF2
 import os
-import tkinter
+from tkinter import *
 import codecs
 import sys
 
 #utf8Writer = codecs.getwriter('utf8')
 #sys.stdout = utf8Writer(sys.stdout)
 
-m = tkinter.Tk()
-m.mainloop()
+mainForm = Tk(screenName='Name Extractor')
+mainForm.title('Renamer')
+formMenu = Menu(mainForm)
+mainForm.config(menu=formMenu)
+fileMenu = Menu(formMenu)
+formMenu.add_cascade(label='File', menu=fileMenu)
+fileMenu.add_command(label='Open...')
+fileMenu.add_separator()
+fileMenu.add_command(label='Exit', command=mainForm.quit)
+
+#w = Canvas(mainForm)
+btnGetFile = Button(mainForm, text='Open', width=15, command=mainForm.destroy)
+btnGetFile.pack()
+mainForm.mainloop()
 
 for filename in os.listdir('ToConvert'):
     #print filename
